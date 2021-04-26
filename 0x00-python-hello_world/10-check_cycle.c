@@ -9,18 +9,20 @@
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *search1 = list, *search2 = list;
+	listint_t *search1, *search2;
 
-	while (search1 != NULL && list != NULL)
+	if (list == NULL || list->next == NULL)
+		return (0);
+
+ 	search1 = list;
+	search2 = list->next;
+
+	while (search1 != NULL && search2 != NULL)
 	{
-		if (search1 == search1->next)
-			return (1);
-		for (search2 = list; search2 != search1; search2 = search2->next)
-		{
-			if (search2 == search1->next)
-				return (1);
-		}
 		search1 = search1->next;
+		search2 = search2->next->next;
+		if (search1 == search2)
+			return (1);
 	}
 	return (0);
 }
