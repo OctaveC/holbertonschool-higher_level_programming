@@ -17,10 +17,10 @@ int check_cycle(listint_t *list)
  	search1 = list;
 	search2 = list->next;
 
-	while (search1 != NULL && search2 != NULL)
+	while (search1 != NULL && search2 != NULL && search2->next != NULL)
 	{
-		search1 = search1->next;
 		search2 = search2->next->next;
+		search1 = search1->next;
 		if (search1 == search2)
 			return (1);
 	}
