@@ -3,7 +3,7 @@
 /**
  * insert_node - Adds a node in an ordered linked list
  * @head: The head of the list
- * @n: The int to be inserted into the list
+ * @number: The int to be inserted into the list
  *
  * Return: The address of the new element, or NULL if it failed
  */
