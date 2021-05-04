@@ -12,5 +12,6 @@
 11-main.py
 13-main.c
 linked_lists.c
+100-test_lists.py
 __pycache__
 a.out
