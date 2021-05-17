@@ -1,0 +1,1 @@
+This is abouyt exceptions in python.
