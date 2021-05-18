@@ -35,7 +35,6 @@ class Node:
         self.__next_node = next_node
 
 
-
 class SinglyLinkedList:
     """defines a singly linked list"""
 
@@ -45,11 +44,15 @@ class SinglyLinkedList:
 
     def __repr__(self):
         string = ""
-        placeholder = self.head
-        while placeholder:
-            string += str(placeholder.data) + "\n"
-            placeholder = placeholder.next_node
-        return string
+        if self.head is None:
+            pass
+        else:
+            placeholder = self.head
+            while placeholder is not None:
+                string += str(placeholder.data)
+                string += '\n'
+                placeholder = placeholder.next_node
+        return string[:-1]
 
     def sorted_insert(self, value):
         """inserts a new Node into the correct position in the list"""
@@ -61,7 +64,8 @@ class SinglyLinkedList:
             new_node.next_node = self.head
             self.head = new_node
         else:
-            while current.next_node != None and current.next_node.data < value:
+            while current.next_node is not None and\
+            current.next_node.data < value:
                 current = current.next_node
             if current.next_node is None:
                 current.next_node = new_node
