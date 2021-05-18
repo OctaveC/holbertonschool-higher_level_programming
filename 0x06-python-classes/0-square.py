@@ -3,4 +3,5 @@
 
 
 class Square:
+    """It is empty"""
     pass
