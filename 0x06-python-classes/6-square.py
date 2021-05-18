@@ -24,7 +24,7 @@ class Square:
             for ite in range(self.__position[1]):
                 print()
             for ite in range(self.__size):
-                print(" " * self.__position[0], end = "")
+                print(" " * self.__position[0], end="")
                 print("#" * self.size)
         else:
             print()
@@ -42,7 +42,6 @@ class Square:
         elif size < 0:
             raise ValueError("size must be >= 0")
         self.__size = size
-
 
     @property
     def position(self):
