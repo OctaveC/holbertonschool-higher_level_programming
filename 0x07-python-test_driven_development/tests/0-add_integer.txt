@@ -1,0 +1,64 @@
+Importing our module
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Checking if you've written documentation for your module
+    >>> docu = __import__("0-add_integer").__doc__
+    >>> len(docu) > 5
+    True
+
+Checking if you've written documentation for your function
+    >>> docu2 = __import__("0-add_integer").add_integer.__doc__
+    >>> len(docu2) > 5
+    True
+
+Adding two positive integers
+    >>> add_integer(3, 4)
+    7
+
+Adding 0 and 0
+    >>> add_integer(0, 0)
+    0
+
+Testing the default value of b
+    >>> add_integer(0)
+    98
+
+Testing adding a positive int to the default value of b
+    >>> add_integer(7)
+    105
+
+Testing adding a negative int to the default value of b
+    >>> add_integer(-7)
+    91
+
+Testing negative numbers
+    >>> add_integer(78, -6)
+    72
+
+Testing floats
+    >>> add_integer(3.14, -4)
+    -1
+
+Testing for a’s data type
+    >>> add_integer("Guillotine", 8)
+    Traceback (most recent call last):
+    	...
+    TypeError: a must be an integer
+
+Testing for b’s data type
+    >>> add_integer(2, ["this", "is", 3])
+    Traceback (most recent call last):
+    	...
+    TypeError: b must be an integer
+
+Check that a has been passed to the program
+    >>> add_integer()
+    Traceback (most recent call last):
+    	...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
+Testing for b’s data type
+    >>> add_integer(1, 2, 3)
+    Traceback (most recent call last):
+    	...
+    TypeError: add_integer() takes from 1 to 2 positional arguments but 3 were given
