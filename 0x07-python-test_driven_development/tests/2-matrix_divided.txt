@@ -1,0 +1,74 @@
+Importing our module
+    >>> matrix_divided = __import__("2-matrix_divided").matrix_divided
+
+Checking if you've written documentation for your module
+    >>> docu = __import__("2-matrix_divided").__doc__
+    >>> len(docu) > 5
+    True
+
+Checking if you've written documentation for your function
+    >>> docu2 = __import__("2-matrix_divided").matrix_divided.__doc__
+    >>> len(docu2) > 5
+    True
+
+Dividing two identical length matrixes by a positive integer
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 2)
+    [[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
+
+Dividing two identical length matrixes by a positive integer
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], -2)
+    [[-0.5, -1.0, -1.5], [-2.0, -2.5, -3.0]]
+
+Testing empty matrix
+    >>> matrix_divided([[]], 2)
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Testing giving an unidimensional list
+    >>> matrix_divided([1, 2, 3], 2)
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Testing giving no argument to function
+    >>> matrix_divided()
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+Testing giving too many arguments to function
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 2, [[1, 2, 3], [4, 5, 6]])
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix_divided() takes 2 positional arguments but 3 were given
+
+Testing giving a string
+    >>> matrix_divided("string", 2)
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Testing dividing by a string
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], "two")
+    Traceback (most recent call last):
+    	...
+    TypeError: div must be a number
+
+Testing having one of the element of the matrix being a string
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6], [7, 8, "nine"]], 2)
+    Traceback (most recent call last):
+    	...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Testing dividing by zero
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 0)
+    Traceback (most recent call last):
+    	...
+    ZeroDivisionError: division by zero
+
+Testing giving an uneven matrix
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6, 7]], 2)
+    Traceback (most recent call last):
+    	...
+    TypeError: Each row of the matrix must have the same size
