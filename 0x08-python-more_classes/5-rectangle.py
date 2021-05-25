@@ -44,7 +44,7 @@ class Rectangle:
         """ Returns a string representing our Rectangle instance """
         stringo = ""
         for ite in range(self.__height):
-           stringo += "#" * self.__width + "\n"
+            stringo += "#" * self.__width + "\n"
         return stringo[:-1]
 
     def __repr__(self):
