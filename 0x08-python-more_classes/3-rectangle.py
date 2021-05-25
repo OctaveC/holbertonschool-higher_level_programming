@@ -43,6 +43,8 @@ class Rectangle:
     def __str__(self):
         """ Returns a string representing our Rectangle instance """
         stringo = ""
+        if self.__width is 0 or self.__height is 0:
+            return stringo
         for ite in range(self.__height):
             stringo += "#" * self.__width + "\n"
         return stringo[:-1]
