@@ -9,16 +9,6 @@ max_integer = __import__("6-max_integer").max_integer
 
 class TestMaxInteger(unittest.TestCase):
     """ Class for unittests for max_integer """
-    def test_mod_doc(self):
-        """ Check for Module documentation """
-        docu = __import__("6-max_integer").__doc__
-        self.assertEqual(len(docu) > 5, True)
-
-    def test_func_doc(self):
-        """ Check for function documentation """
-        docu2 = __import__("6-max_integer").max_integer.__doc__
-        self.assertEqual(len(docu2) > 5, True)
-
     def test_pos(self):
         """ Test positive integers """
         self.assertEqual(max_integer([1, 2, 3, 4]), 4)
