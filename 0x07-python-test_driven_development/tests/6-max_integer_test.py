@@ -25,7 +25,7 @@ class TestMaxInteger(unittest.TestCase):
         """ Test floats """
         self.assertEqual(max_integer([-1, 2.3, 4.5, -4.8]), 4.5)
 
-    def test_float(self):
+    def test_only_one(self):
         """ Test floats """
         self.assertEqual(max_integer([67]), 67)
 
