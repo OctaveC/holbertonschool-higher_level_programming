@@ -1,0 +1,61 @@
+Importing our module
+    >>> MyList = __import__("1-my_list").MyList
+
+Checking if you've written documentation for your module
+    >>> docu = __import__("1-my_list").__doc__
+    >>> len(docu) > 5
+    True
+
+Checking if you've written documentation for your function
+    >>> docu2 = __import__("1-my_list").MyList.__doc__
+    >>> len(docu2) > 5
+    True
+
+Checking if you've written documentation for your public intance method
+    >>> docu3 = __import__("1-my_list").MyList.print_sorted.__doc__
+    >>> len(docu3) > 5
+    True
+
+Checking that MyList inherits from list
+    >>> issubclass(MyList, list)
+    True
+
+Checking for empty list
+    >>> list = MyList()
+    >>> list.print_sorted()
+    []
+
+Checking that appending works
+    >>> list.append(3)
+    >>> list.append(6)
+    >>> list.append(9)
+    >>> list.append(10)
+    >>> print(list)
+    [3, 6, 9, 10]
+
+Checking for list in correct order
+    >>> list.print_sorted()
+    [3, 6, 9, 10]
+
+Checking for unordered list
+    >>> list = MyList()
+    >>> list.append(10)
+    >>> list.append(9)
+    >>> list.append(6)
+    >>> list.append(3)
+    >>> print(list)
+    [10, 9, 6, 3]
+    >>> list.print_sorted()
+    [3, 6, 9, 10]
+    >>> print(list)
+    [10, 9, 6, 3]
+
+Checking for negative and 0 values
+    >>> list.append(-5)
+    >>> list.append(0)
+    >>> print(list)
+    [10, 9, 6, 3, -5, 0]
+    >>> list.print_sorted()
+    [-5, 0, 3, 6, 9, 10]
+    >>> print(list)
+    [10, 9, 6, 3, -5, 0]

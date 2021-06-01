@@ -1,0 +1,82 @@
+Importing our module
+    >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+
+Checking if you've written documentation for your module
+    >>> docu = __import__("7-base_geometry").__doc__
+    >>> len(docu) > 5
+    True
+
+Checking if you've written documentation for your function
+    >>> docu2 = __import__("7-base_geometry").BaseGeometry.__doc__
+    >>> len(docu2) > 5
+    True
+
+Checking if you've written documentation for your public intance methods
+    >>> docu3 = __import__("7-base_geometry").BaseGeometry.integer_validator.__doc__
+    >>> len(docu3) > 5
+    True
+
+    >>> docu4 = __import__("7-base_geometry").BaseGeometry.area.__doc__
+    >>> len(docu4) > 5
+    True
+
+Checking area call
+    >>> base = BaseGeometry()
+    >>> base.area()
+    Traceback (most recent call last):
+        ...
+    Exception: area() is not implemented
+
+Checking with int (default case)
+    >>> base.integer_validator("int", 13)
+
+Checking with empty string for name
+    >>> base.integer_validator("", 30)
+
+Checking with string for value
+    >>> base.integer_validator("name", "David")
+    Traceback (most recent call last):
+        ...
+    TypeError: name must be an integer
+
+Checking with 0 for value
+    >>> base.integer_validator("truc", 0)
+    Traceback (most recent call last):
+        ...
+    ValueError: truc must be greater than 0
+
+Checking with a negative value
+    >>> base.integer_validator("Negapi", -5)
+    Traceback (most recent call last):
+        ...
+    ValueError: Negapi must be greater than 0
+
+Checking with a float
+    >>> base.integer_validator("float", 3.5)
+    Traceback (most recent call last):
+        ...
+    TypeError: float must be an integer
+
+Checking with a list
+    >>> base.integer_validator("list", [1, 2, 3])
+    Traceback (most recent call last):
+    	      ...
+    TypeError: list must be an integer
+
+Checking with None
+    >>> base.integer_validator("none", None)
+    Traceback (most recent call last):
+    	      ...
+    TypeError: none must be an integer
+
+Checking with missing two arguments
+    >>> base.integer_validator()
+    Traceback (most recent call last):
+        ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Checking with missing one arguments
+    >>> base.integer_validator("arg")
+    Traceback (most recent call last):
+        ...
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
