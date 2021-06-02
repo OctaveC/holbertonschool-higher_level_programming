@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Module for Student """
-import json
 
 
 class Student():
