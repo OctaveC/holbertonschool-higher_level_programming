@@ -53,10 +53,10 @@ class Base:
     def create(cls, **dictionary):
         """ Returns an instance with all attributes already set """
         if cls.__name__ is "Rectangle":
-            new = cls(1, 1, 0, 0, 0)
+            new = cls(1, 1)
         elif cls.__name__ is "Square":
-            new = cls(1, 0, 0, 0)
-        cls.update(new, **dictionary)
+            new = cls(1)
+        new.update(**dictionary)
         return new
 
     @classmethod
