@@ -526,8 +526,14 @@ class TestsForSquare(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             s.update(2, 2, 2, -1)
 
-    def test_update_blank(self):
-        """Test update with no."""
+    def test_extra_parameter_s(self):
+        """ ffdgtfdgTest with extra parameter."""
+        s = Square(1, 2, 3, 4)
+        s.update(1, 2, 3, 4, 5, 6)
+        self.assertEqual(str(s), "[Square] (1) 3/4 - 2")
+
+    def test_update_blank_s(self):
+        """ rfferTest update with no."""
         temp_stdout = StringIO()
         with contextlib.redirect_stdout(temp_stdout):
             s1 = Square(10, 10, 10)
