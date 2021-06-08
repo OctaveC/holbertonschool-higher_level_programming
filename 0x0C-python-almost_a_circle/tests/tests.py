@@ -200,6 +200,19 @@ class TestsforRectangle(unittest.TestCase):
         with self.assertRaises(TypeError):
             r = self.Rec1.area(2)
 
+    def test_display(self):
+        """ Testing display """
+        Rec3 = Rectangle(5, 5, 5, 5, 3)
+        self.assertEqual(Rec3.display(), None)
+
+    def test_display_without_x_and_y(self):
+        """ Testing display without x and y """
+        self.assertEqual(self.Rec1.display(), None)
+
+    def test_display_without_y(self):
+        """ Testing display without y """
+        self.assertEqual(self.Rec2.display(), None)
+
     def test_display_too_many_args(self):
         """ Testing display with too many args """
         with self.assertRaises(TypeError):
