@@ -490,11 +490,12 @@ class TestsForSquare(unittest.TestCase):
         self.assertEqual(str(s), "[Square] (200) 2/0 - 1")
 
 
-    def test_to_dictionary_s(self):
-        """Test the to_dictionary method"""
-        s = Square(2, 4, 1, 300)
-        self.assertEqual(print(s.to_dictionary()),
-                         print("{'x': 1, 'id': 300, 'size': 4, 'y': 1}"))
+    def test_to_dictionary(self):
+        """Testing to_dictionary """
+        s = Square(10, 1, 9)
+        s_dictionary = s.to_dictionary()
+        self.assertEqual(s_dictionary,
+                         {'x': 1, 'y': 9, 'id': 10, 'size': 10})
 
     def test_update_args_s(self):
         """ Testing the update method with *args """
@@ -550,3 +551,65 @@ class TestsForSquare(unittest.TestCase):
         s = Square.create(**{ 'id': 500, 'width': 2, 'height': 2, 'x': 3 })
         self.assertEqual(print(s.to_dictionary()),
                          print("{'height': 2, 'x': 3, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_save_to_file_s(self):
+        """Test save_to_file method."""
+        s1 = Square(1, 2, 1, 600)
+        s2 = Square(2, 4, 2, 700)
+        r_list = [s1, s2]
+        Rectangle.save_to_file(r_list)
+
+        with open("Rectangle.json", "r") as file:
+            reader = file.read()
+            to_dict = [s1.to_dictionary(), s2.to_dictionary()]
+            self.assertEqual(reader, json.dumps(to_dict))
+
+    def test_save_to_file_None_s(self):
+        """Test save_to_file with None """
+        tmp_stdout = StringIO()
+        with contextlib.redirect_stdout(tmp_stdout):
+            Square.save_to_file(None)
+            with open("Square.json", "r") as file:
+                print(file.read())
+        out = tmp_stdout.getvalue()
+        self.assertEqual(out, "[]\n")
+
+
+    def test_save_to_file_array_empty_s(self):
+        """Test save_to_file with [] """
+        r_list = []
+        Square.save_to_file(r_list)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), '[]')
+
+    def test_load_from_file_rect_s(self):
+        ''' Testing Normal usage'''
+        s1 = Square(10, 7, 2, 8)
+        s2 = Square(2, 4)
+        list_squares_input = [s1, s2]
+
+        Square.save_to_file(list_squares_input)
+
+        list_squares_output = Square.load_from_file()
+
+        self.assertEqual(list_squares_input[0].to_dictionary(), list_squares_output[0].to_dictionary())
+        self.assertEqual(list_squares_input[1].to_dictionary(), list_squares_output[1].to_dictionary())
+
+    def test_load_from_file_rec_not_exist_s(self):
+        ''' Testing File does not exists'''
+        try:
+            os.remove("Square.json")
+        except:
+            pass
+        finally:
+            self.assertEqual(Square.load_from_file(), [])
+
+    def test_load_from_file_rect_empty_s(self):
+        ''' Testing Empty file'''
+        try:
+            os.remove("Square.json")
+        except:
+            pass
+        with open("Square.json", 'a') as file:
+            pass
+        self.assertEqual(Square.load_from_file(), [])
