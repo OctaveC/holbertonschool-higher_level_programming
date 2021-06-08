@@ -230,7 +230,7 @@ class TestsforRectangle(unittest.TestCase):
         rec4 = Rectangle(11, 2, 1, 9)
         rec4_dictionary = rec4.to_dictionary()
         self.assertEqual(rec4_dictionary,
-                         {'x': 1, 'y': 9, 'id': 5, 'height': 2, 'width': 11})
+                         {'x': 1, 'y': 9, 'id': 4, 'height': 2, 'width': 11})
 
     def test_update_args(self):
         """ Testing the update method with *args """
@@ -293,7 +293,7 @@ class TestsforRectangle(unittest.TestCase):
         """Test save_to_file method."""
         tmp_stdout = StringIO()
         with contextlib.redirect_stdout(tmp_stdout):
-            Rectangle.save_to_file(Rectangle(2, 5))
+            Rectangle.save_to_file([Rectangle(2, 5)])
             with open("Rectangle.json", "r") as file:
                 print(file.read())
         out = tmp_stdout.getvalue()
