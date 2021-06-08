@@ -297,6 +297,7 @@ class TestsforRectangle(unittest.TestCase):
             with open("Rectangle.json", "r") as file:
                 print(file.read())
         out = tmp_stdout.getvalue()
+        self.assertEqual(out, out)
 
     def test_save_to_file_None(self):
         """Test save_to_file with None """
@@ -306,15 +307,18 @@ class TestsforRectangle(unittest.TestCase):
             with open("Rectangle.json", "r") as file:
                 print(file.read())
         out = tmp_stdout.getvalue()
+        self.assertEqual(out, "[]\n")
+
 
     def test_save_to_file_empty(self):
-        """Test save_to_file with None """
+        """Test save_to_file with [] """
         tmp_stdout = StringIO()
         with contextlib.redirect_stdout(tmp_stdout):
             Rectangle.save_to_file([])
             with open("Rectangle.json", "r") as file:
                 print(file.read())
         out = tmp_stdout.getvalue()
+        self.assertEqual(out, "[]\n")
 
 
 class TestsForSquare(unittest.TestCase):
