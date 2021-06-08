@@ -524,6 +524,18 @@ class TestsForSquare(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             s.update(2, 2, 2, -1)
 
+    def test_too_many_square(self):
+        """ Testing too many args for update for square """
+        s = Square(2, 2, 0, 0)
+        s.update(2, 3, 3, 2, 2)
+        self.assertEqual(str(s), "[Square] (2) 3/2 - 3")
+
+    def test_no_update_square(self):
+        """ Testing no args for update for square"""
+        s = Square(2, 2, 3, 1)
+        s.update()
+        self.assertEqual(str(s), "[Square] (1) 2/3 - 2")
+
     def test_extra_parameter_s(self):
         """ ffdgtfdgTest with extra parameter."""
         s = Square(1, 2, 3, 4)
