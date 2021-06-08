@@ -534,13 +534,9 @@ class TestsForSquare(unittest.TestCase):
 
     def test_update_blank_s(self):
         """ rfferTest update with no."""
-        temp_stdout = StringIO()
-        with contextlib.redirect_stdout(temp_stdout):
-            s1 = Square(10, 10, 10)
-            s1.update()
-            print(s1)
-        output = temp_stdout.getvalue()
-        self.assertEqual(output, '[Square] (11) 10/10 - 10\n')
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update()
+        self.assertEqual(str(r), "[Rectangle] (1) 0/0 - 1/1")
 
     def test_create_square(self):
         """ Testing other way to create Square"""
