@@ -301,6 +301,11 @@ class TestsforRectangle(unittest.TestCase):
             to_dict = [r25.to_dictionary(), r26.to_dictionary()]
             self.assertEqual(reader, json.dumps(to_dict))
 
+        r_list = []
+        Rectangle.save_to_file(r_list)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), '[]')
+
     def test_save_to_file_None(self):
         """Test save_to_file with None """
         tmp_stdout = StringIO()
@@ -310,14 +315,6 @@ class TestsforRectangle(unittest.TestCase):
                 print(file.read())
         out = tmp_stdout.getvalue()
         self.assertEqual(out, "[]\n")
-
-
-    def test_save_to_file_array_empty(self):
-        """Test save_to_file with [] """
-        r_list = []
-        Rectangle.save_to_file(r_list)
-        with open("Rectangle.json", "r") as file:
-            self.assertEqual(file.read(), '[]')
 
     def test_load_from_file_rect(self):
         ''' Testing Normal usage'''
@@ -567,16 +564,16 @@ class TestsForSquare(unittest.TestCase):
         s1 = Square(1, 2, 1, 600)
         s2 = Square(2, 4, 2, 700)
         r_list = [s1, s2]
-        Rectangle.save_to_file(r_list)
+        Square.save_to_file(r_list)
 
-        with open("Rectangle.json", "r") as file:
+        with open("Square.json", "r") as file:
             reader = file.read()
             to_dict = [s1.to_dictionary(), s2.to_dictionary()]
             self.assertEqual(reader, json.dumps(to_dict))
 
         r_list = []
-        Rectangle.save_to_file(r_list)
-        with open("Rectangle.json", "r") as file:
+        Square.save_to_file(r_list)
+        with open("Square.json", "r") as file:
             self.assertEqual(file.read(), '[]')
 
     def test_save_to_file_None_s(self):
