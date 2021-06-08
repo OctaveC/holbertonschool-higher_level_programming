@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Contains tests for all our classes """
 
-
+import os
 import unittest
 import json
 from models import base
@@ -230,7 +230,7 @@ class TestsforRectangle(unittest.TestCase):
         rec4 = Rectangle(11, 2, 1, 9)
         rec4_dictionary = rec4.to_dictionary()
         self.assertEqual(rec4_dictionary,
-                         {'x': 1, 'y': 9, 'id': 3, 'height': 2, 'width': 11})
+                         {'x': 1, 'y': 9, 'id': 12, 'height': 2, 'width': 11})
 
     def test_update_args(self):
         """ Testing the update method with *args """
@@ -312,13 +312,74 @@ class TestsforRectangle(unittest.TestCase):
         self.assertEqual(out, "[]\n")
 
 
-    def test_save_to_file_empty(self):
+    def test_save_to_file_array_empty(self):
         """Test save_to_file with [] """
         r_list = []
         Rectangle.save_to_file(r_list)
         with open("Rectangle.json", "r") as file:
             self.assertEqual(file.read(), '[]')
 
+    def test_load_from_file_rect(self):
+        ''' Testing Normal usage'''
+        rect10 = Rectangle(10, 7, 2, 8)
+        rect11 = Rectangle(2, 4)
+        list_rectangles_input = [rect10, rect11]
+
+        Rectangle.save_to_file(list_rectangles_input)
+
+        list_rectangles_output = Rectangle.load_from_file()
+
+        self.assertEqual(list_rectangles_input[0].to_dictionary(), list_rectangles_output[0].to_dictionary())
+        self.assertEqual(list_rectangles_input[1].to_dictionary(), list_rectangles_output[1].to_dictionary())
+
+    def test_load_from_file_rec_not_exist(self):
+        ''' Testing File does not exists'''
+        try:
+            os.remove("Rectangle.json")
+        except:
+            pass
+        finally:
+            self.assertEqual(Rectangle.load_from_file(), [])
+
+    def test_load_from_file_rect_empty(self):
+        ''' Testing Empty file'''
+        try:
+            os.remove("Rectangle.json")
+        except:
+            pass
+        with open("Rectangle.json", 'a') as file:
+            pass
+        self.assertEqual(Rectangle.load_from_file(), [])
+
+    def test_create_rectangle(self):
+        """ Testing other way to create Rectangle"""
+        rect12 = Rectangle.create(**{ 'id': 500 })
+        self.assertEqual(print(rect12.to_dictionary()),
+                         print("{'height': 1, 'x': 0, 'y': 0, 'width': 1, 'id': 500}"))
+
+    def test_create_rectangle_2(self):
+        """ Testing other way to create Rectangle"""
+        rect12 = Rectangle.create(**{ 'id': 500, 'width': 2 })
+        self.assertEqual(print(rect12.to_dictionary()),
+                         print("{'height': 1, 'x': 0, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_create_rectangle_3(self):
+        """ Testing other way to create Rectangle"""
+        rect12 = Rectangle.create(**{ 'id': 500, 'width': 2, 'height': 2 })
+        self.assertEqual(print(rect12.to_dictionary()),
+                         print("{'height': 2, 'x': 0, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_create_rectangle_4(self):
+        """ Testing other way to create Rectangle"""
+        rect12 = Rectangle.create(**{ 'id': 500, 'width': 2, 'height': 2, 'x': 3 })
+        self.assertEqual(print(rect12.to_dictionary()),
+                         print("{'height': 2, 'x': 3, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_create_rectangle_5(self):
+        """ Testing other way to create Rectangle"""
+        rect12 = Rectangle.create(**{ 'id': 500, 'width': 2, 'height': 2, 'x': 3, 'y': 4 })
+        self.assertEqual(print(rect12.to_dictionary()),
+                         print("{'height': 2, 'x': 3, 'y': 4, 'width': 2, 'id': 500}"))
 
 class TestsForSquare(unittest.TestCase):
     """ Test for the Square class"""
@@ -359,6 +420,11 @@ class TestsForSquare(unittest.TestCase):
         """ Testing for standard y """
         self.assertEqual(self.squa1.y, 0)
         self.assertEqual(self.squa2.y, 0)
+
+    def test_additional(self):
+        """ Testing for standard y """
+        Squa5 = Square(1, 2, 3, 4)
+        self.assertEqual(Squa5.y, 3)
 
     def test_size_mandatory(self):
         """ Testing width mandatory """
