@@ -424,7 +424,7 @@ class TestsForSquare(unittest.TestCase):
     def test_additional(self):
         """ Testing for standard y """
         Squa5 = Square(1, 2, 3, 4)
-        self.assertEqual(Squa5.y, 3)
+        self.assertEqual(Squa5.id, 4)
 
     def test_size_mandatory(self):
         """ Testing width mandatory """
