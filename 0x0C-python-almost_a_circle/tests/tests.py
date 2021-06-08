@@ -534,7 +534,7 @@ class TestsForSquare(unittest.TestCase):
             s1.update()
             print(s1)
         output = temp_stdout.getvalue()
-        self.assertEqual(output, '[Square] (1) 10/10 - 10\n')
+        self.assertEqual(output, '[Square] (11) 10/10 - 10\n')
 
     def test_create_square(self):
         """ Testing other way to create Square"""
