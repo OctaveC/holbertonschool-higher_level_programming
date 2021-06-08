@@ -293,9 +293,25 @@ class TestsforRectangle(unittest.TestCase):
         """Test save_to_file method."""
         tmp_stdout = StringIO()
         with contextlib.redirect_stdout(tmp_stdout):
-            rec5 = Rectangle(11, 8, 3, 8)
-            rec6 = Rectangle(2, 5)
-            Rectangle.save_to_file([rec5, rec6])
+            Rectangle.save_to_file(Rectangle(2, 5))
+            with open("Rectangle.json", "r") as file:
+                print(file.read())
+        out = tmp_stdout.getvalue()
+
+    def test_save_to_file_None(self):
+        """Test save_to_file with None """
+        tmp_stdout = StringIO()
+        with contextlib.redirect_stdout(tmp_stdout):
+            Rectangle.save_to_file(None)
+            with open("Rectangle.json", "r") as file:
+                print(file.read())
+        out = tmp_stdout.getvalue()
+
+    def test_save_to_file_empty(self):
+        """Test save_to_file with None """
+        tmp_stdout = StringIO()
+        with contextlib.redirect_stdout(tmp_stdout):
+            Rectangle.save_to_file([])
             with open("Rectangle.json", "r") as file:
                 print(file.read())
         out = tmp_stdout.getvalue()
