@@ -529,11 +529,11 @@ class TestsForSquare(unittest.TestCase):
         s.update(1, 2, 3, 4, 5, 6)
         self.assertEqual(str(s), "[Square] (1) 3/4 - 2")
 
-    def test_update_blank_s(self):
-        """ rfferTest update with no."""
-        r = Rectangle(1, 1, 0, 0, 1)
-        r.update()
-        self.assertEqual(str(r), "[Rectangle] (1) 0/0 - 1/1")
+    def test_update_no_args_s(self):
+        """ ZKEZDKODPno args for update"""
+        s = Square(1, 1, 0, 0)
+        s.update()
+        self.assertEqual(str(s), "[Square] (0) 1/0 - 1")
 
     def test_create_square(self):
         """ Testing other way to create Square"""
