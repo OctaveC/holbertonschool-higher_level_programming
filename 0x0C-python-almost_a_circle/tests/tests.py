@@ -496,9 +496,9 @@ class TestsForSquare(unittest.TestCase):
 
     def test_update_no_args_s(self):
         """ ZKEZDKODPno args for update"""
-        s = Square(1, 1, 0, 0)
+        s = Square(1)
         s.update()
-        self.assertEqual(str(s), "[Square] (0) 1/0 - 1")
+        self.assertEqual(str(s), "[Square] (11) 0/0 - 1")
 
     def test_update_args_s(self):
         """ Testing the update method with *args """
