@@ -494,6 +494,12 @@ class TestsForSquare(unittest.TestCase):
         self.assertEqual(s_dictionary,
                          {'x': 1, 'y': 9, 'id': 10, 'size': 10})
 
+    def test_update_no_args_s(self):
+        """ ZKEZDKODPno args for update"""
+        s = Square(1, 1, 0, 0)
+        s.update()
+        self.assertEqual(str(s), "[Square] (0) 1/0 - 1")
+
     def test_update_args_s(self):
         """ Testing the update method with *args """
         s = Square(2, 2, 0, 0)
@@ -528,12 +534,6 @@ class TestsForSquare(unittest.TestCase):
         s = Square(1, 2, 3, 4)
         s.update(1, 2, 3, 4, 5, 6)
         self.assertEqual(str(s), "[Square] (1) 3/4 - 2")
-
-    def test_update_no_args_s(self):
-        """ ZKEZDKODPno args for update"""
-        s = Square(1, 1, 0, 0)
-        s.update()
-        self.assertEqual(str(s), "[Square] (0) 1/0 - 1")
 
     def test_create_square(self):
         """ Testing other way to create Square"""
