@@ -10,6 +10,8 @@ from models import square
 Base = base.Base
 Rectangle = rectangle.Rectangle
 Square = square.Square
+import contextlib
+from io import StringIO
 
 
 class TestsForBase(unittest.TestCase):
@@ -223,6 +225,13 @@ class TestsforRectangle(unittest.TestCase):
         self.assertEqual(str(self.Rec1), "[Rectangle] (1) 0/0 - 5/5")
         self.assertEqual(str(self.Rec2), "[Rectangle] (2) 6/0 - 4/5")
 
+    def test_to_dictionary(self):
+        """Test the to_dictionary method"""
+        rec4 = Rectangle(11, 2, 1, 9)
+        rec4_dictionary = rec4.to_dictionary()
+        self.assertEqual(rec4_dictionary,
+                         {'x': 1, 'y': 9, 'id': 5, 'height': 2, 'width': 11})
+
     def test_update_args(self):
         """ Testing the update method with *args """
         r = Rectangle(2, 2, 0, 0, 2)
@@ -279,6 +288,17 @@ class TestsforRectangle(unittest.TestCase):
         r = Rectangle(2, 2, 0, 0, 2)
         r.update(1, 1, 1, 1, 1, width=3, height=3, x=3, y=3, id=3)
         self.assertEqual(str(r), "[Rectangle] (1) 1/1 - 1/1")
+
+    def test_save_to_file(self):
+        """Test save_to_file method."""
+        tmp_stdout = StringIO()
+        with contextlib.redirect_stdout(tmp_stdout):
+            rec5 = Rectangle(11, 8, 3, 8)
+            rec6 = Rectangle(2, 5)
+            Rectangle.save_to_file([rec5, rec6])
+            with open("Rectangle.json", "r") as file:
+                print(file.read())
+        out = tmp_stdout.getvalue()
 
 
 class TestsForSquare(unittest.TestCase):
