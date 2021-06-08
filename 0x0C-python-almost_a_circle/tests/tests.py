@@ -230,7 +230,7 @@ class TestsforRectangle(unittest.TestCase):
         rec4 = Rectangle(11, 2, 1, 9)
         rec4_dictionary = rec4.to_dictionary()
         self.assertEqual(rec4_dictionary,
-                         {'x': 1, 'y': 9, 'id': 4, 'height': 2, 'width': 11})
+                         {'x': 1, 'y': 9, 'id': 3, 'height': 2, 'width': 11})
 
     def test_update_args(self):
         """ Testing the update method with *args """
@@ -291,13 +291,15 @@ class TestsforRectangle(unittest.TestCase):
 
     def test_save_to_file(self):
         """Test save_to_file method."""
-        tmp_stdout = StringIO()
-        with contextlib.redirect_stdout(tmp_stdout):
-            Rectangle.save_to_file([Rectangle(2, 5)])
-            with open("Rectangle.json", "r") as file:
-                print(file.read())
-        out = tmp_stdout.getvalue()
-        self.assertEqual(out, out)
+        r25 = Rectangle(1, 2, 1, 1, 600)
+        r26 = Rectangle(2, 4, 2, 2, 700)
+        r_list = [r25, r26]
+        Rectangle.save_to_file(r_list)
+
+        with open("Rectangle.json", "r") as file:
+            reader = file.read()
+            to_dict = [r25.to_dictionary(), r26.to_dictionary()]
+            self.assertEqual(reader, json.dumps(to_dict))
 
     def test_save_to_file_None(self):
         """Test save_to_file with None """
@@ -312,13 +314,10 @@ class TestsforRectangle(unittest.TestCase):
 
     def test_save_to_file_empty(self):
         """Test save_to_file with [] """
-        tmp_stdout = StringIO()
-        with contextlib.redirect_stdout(tmp_stdout):
-            Rectangle.save_to_file([])
-            with open("Rectangle.json", "r") as file:
-                print(file.read())
-        out = tmp_stdout.getvalue()
-        self.assertEqual(out, "[]\n")
+        r_list = []
+        Rectangle.save_to_file(r_list)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), '[]')
 
 
 class TestsForSquare(unittest.TestCase):
