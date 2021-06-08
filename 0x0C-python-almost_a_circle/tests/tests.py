@@ -489,25 +489,63 @@ class TestsForSquare(unittest.TestCase):
         s = Square(1, 2, id=200)
         self.assertEqual(str(s), "[Square] (200) 2/0 - 1")
 
-    def test_display_s(self):
-        """ Testing display """
-        s = Square(5, 5, 5, 5)
-        self.assertEqual(s.display(), None)
-
-    def test_display_without_x_and_y_s(self):
-        """ Testing display without x and y """
-        self.assertEqual(self.squa1.display(), None)
-
-    def test_display_without_y_s(self):
-        """ Testing display without y """
-        self.assertEqual(self.squa2.display(), None)
-
-    def test_display_too_many_args_s(self):
-        """ Testing display with too many args """
-        with self.assertRaises(TypeError):
-            self.squa1.display(2)
 
     def test_to_dictionary_s(self):
+        """Test the to_dictionary method"""
         s = Square(2, 4, 1, 300)
         self.assertEqual(print(s.to_dictionary()),
                          print("{'x': 1, 'id': 300, 'height': 4, 'y': 1, 'width': 2}"))
+
+    def test_update_args_s(self):
+        """ Testing the update method with *args """
+        s = Square(2, 2, 0, 0)
+        self.assertEqual(str(s), "[Square] (0) 2/0 - 2")
+        s.update(12)
+        self.assertEqual(str(s), "[Square] (12) 2/0 - 2")
+        s.update(42, 3)
+        self.assertEqual(str(s), "[Square] (42) 2/0 - 3")
+        s.update(42, 2, 3)
+        self.assertEqual(str(s), "[Square] (42) 3/0 - 2")
+        s.update(42, 2, 3, 7)
+        self.assertEqual(str(s), "[Square] (42) 3/7 - 2")
+
+    def test_update_args_setter_s(self):
+        """ Testing that the update method uses setters """
+        s = Square(2, 2, 0, 0)
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            s.update(2, "hi!")
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            s.update(2, 2, "meh")
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            s.update(2, 2, 2, "truc")
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            s.update(2, 0)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            s.update(2, -1)
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            s.update(2, 2, 2, -1)
+
+
+    def test_create_square(self):
+        """ Testing other way to create Square"""
+        s = Square.create(**{ 'id': 500 })
+        self.assertEqual(print(s.to_dictionary()),
+                         print("{'height': 1, 'x': 0, 'y': 0, 'width': 1, 'id': 500}"))
+
+    def test_create_square_2(self):
+        """ Testing other way to create Square"""
+        s = Square.create(**{ 'id': 500, 'width': 2 })
+        self.assertEqual(print(s.to_dictionary()),
+                         print("{'height': 1, 'x': 0, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_create_square_3(self):
+        """ Testing other way to create Square"""
+        s = Square.create(**{ 'id': 500, 'width': 2, 'height': 2 })
+        self.assertEqual(print(s.to_dictionary()),
+                         print("{'height': 2, 'x': 0, 'y': 0, 'width': 2, 'id': 500}"))
+
+    def test_create_square_4(self):
+        """ Testing other way to create Square"""
+        s = Square.create(**{ 'id': 500, 'width': 2, 'height': 2, 'x': 3 })
+        self.assertEqual(print(s.to_dictionary()),
+                         print("{'height': 2, 'x': 3, 'y': 0, 'width': 2, 'id': 500}"))
