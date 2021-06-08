@@ -483,3 +483,31 @@ class TestsForSquare(unittest.TestCase):
         """ Testing display with too many args """
         with self.assertRaises(TypeError):
             self.squa1.display(9)
+
+    def test_str_s(self):
+        """ Test of __str__() for Square exists  """
+        s = Square(1, 2, id=200)
+        self.assertEqual(str(s), "[Square] (200) 2/0 - 1")
+
+    def test_display_s(self):
+        """ Testing display """
+        s = Square(5, 5, 5, 5)
+        self.assertEqual(s.display(), None)
+
+    def test_display_without_x_and_y_s(self):
+        """ Testing display without x and y """
+        self.assertEqual(self.squa1.display(), None)
+
+    def test_display_without_y_s(self):
+        """ Testing display without y """
+        self.assertEqual(self.squa2.display(), None)
+
+    def test_display_too_many_args_s(self):
+        """ Testing display with too many args """
+        with self.assertRaises(TypeError):
+            self.squa1.display(2)
+
+    def test_to_dictionary_s(self):
+        s = Square(2, 4, 1, 300)
+        self.assertEqual(print(s.to_dictionary()),
+                         print("{'x': 1, 'id': 300, 'height': 4, 'y': 1, 'width': 2}"))
