@@ -501,8 +501,6 @@ class TestsForSquare(unittest.TestCase):
         """ Testing the update method with *args """
         s = Square(2, 2, 0, 0)
         self.assertEqual(str(s), "[Square] (0) 2/0 - 2")
-        s.update()
-        self.assertEqual(str(s), "[Square] (0) 2/0 - 2")
         s.update(12)
         self.assertEqual(str(s), "[Square] (12) 2/0 - 2")
         s.update(42, 3)
@@ -527,6 +525,12 @@ class TestsForSquare(unittest.TestCase):
             s.update(2, -1)
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             s.update(2, 2, 2, -1)
+
+    def test_update_no_args_s(self):
+        """ Testing no args for update"""
+        s = Square(2, 2, 3, 1)
+        s.update()
+        self.assertEqual(str(s), "[Square] (1) 2/3 - 2")
 
     def test_create_square(self):
         """ Testing other way to create Square"""
