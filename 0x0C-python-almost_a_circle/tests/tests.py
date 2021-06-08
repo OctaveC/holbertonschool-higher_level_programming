@@ -526,11 +526,15 @@ class TestsForSquare(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             s.update(2, 2, 2, -1)
 
-    def test_update_no_args_s(self):
-        """ Testing no args for update"""
-        s = Square(2, 2, 3, 1)
-        s.update()
-        self.assertEqual(str(s), "[Square] (1) 2/3 - 2")
+    def test_update_blank(self):
+        """Test update with no."""
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            s1 = Square(10, 10, 10)
+            s1.update()
+            print(s1)
+        output = temp_stdout.getvalue()
+        self.assertEqual(output, '[Square] (1) 10/10 - 10\n')
 
     def test_create_square(self):
         """ Testing other way to create Square"""
