@@ -494,11 +494,13 @@ class TestsForSquare(unittest.TestCase):
         """Test the to_dictionary method"""
         s = Square(2, 4, 1, 300)
         self.assertEqual(print(s.to_dictionary()),
-                         print("{'x': 1, 'id': 300, 'height': 4, 'y': 1, 'width': 2}"))
+                         print("{'x': 1, 'id': 300, 'size': 4, 'y': 1}"))
 
     def test_update_args_s(self):
         """ Testing the update method with *args """
         s = Square(2, 2, 0, 0)
+        self.assertEqual(str(s), "[Square] (0) 2/0 - 2")
+        s.update()
         self.assertEqual(str(s), "[Square] (0) 2/0 - 2")
         s.update(12)
         self.assertEqual(str(s), "[Square] (12) 2/0 - 2")
@@ -524,7 +526,6 @@ class TestsForSquare(unittest.TestCase):
             s.update(2, -1)
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             s.update(2, 2, 2, -1)
-
 
     def test_create_square(self):
         """ Testing other way to create Square"""
