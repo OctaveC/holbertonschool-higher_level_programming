@@ -1,4 +1,5 @@
 #!/usr/bin/node
 
-const langu = ['C is fun', 'Python is cool', 'Javascript is amazing'];
-langu.forEach(element => console.log(element));
+const sentences = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
+
+sentences.forEach(element => console.log(element));
