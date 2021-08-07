@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-script that lists all states from the database hbtn_0e_0_usa
+takes in an argument and displays all values in the states table hbtn_0e_0_usa
+where name matches the argument
 """
 import sys
 import MySQLdb
@@ -15,7 +16,8 @@ if __name__ == "__main__":
                         db=sys.argv[3])
 
     cur = database.cursor()
-    cur.execute("SELECT id, name FROM states ORDER by id ASC")
+    cur.execute("SELECT id, name FROM states WHERE name LIKE %s"
+                "ORDER by id ASC", (sys.argv[4],))
 
     for row in cur.fetchall():
         print(row)
