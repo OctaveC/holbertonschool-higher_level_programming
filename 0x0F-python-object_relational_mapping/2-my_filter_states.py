@@ -6,7 +6,6 @@ where name matches the argument
 import sys
 import MySQLdb
 
-
 if __name__ == "__main__":
     database = MySQLdb.connect(
                         host="localhost",
@@ -16,7 +15,7 @@ if __name__ == "__main__":
                         db=sys.argv[3])
 
     cur = database.cursor()
-    cur.execute("SELECT * FROM states WHERE name LIKE \
+    cur.execute("SELECT * FROM states WHERE BINARY name=\
                  '{}' ORDER by id ASC".format(sys.argv[4]))
 
     for row in cur.fetchall():
