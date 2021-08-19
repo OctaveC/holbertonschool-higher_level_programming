@@ -11,13 +11,13 @@ def find_peak(l_o_i):
     """
     if l_o_i == []:
         return None
-    else if len(l_o_i) == 1:
+    elif len(l_o_i) == 1:
         return l_o_i[0]
-    else if l_o_i[0] >= l_o_i[1]:
+    elif l_o_i[0] >= l_o_i[1]:
         return l_o_i[0]
-    else if l_o_i[len(l_o_i) - 1] >= l_o_i[len(l_o_i) - 2]:
+    elif l_o_i[len(l_o_i) - 1] >= l_o_i[len(l_o_i) - 2]:
         return l_o_i[len(l_o_i) - 1]
 
     for ite in range(1, len(l_o_i) - 1):
-        if l_o_i[ite] >= l_o_i[i + 1] and l_o_i[ite] >= l_o_i[i - 1]:
-            return l_o_i[i]
+        if l_o_i[ite] >= l_o_i[ite + 1] and l_o_i[ite] >= l_o_i[ite - 1]:
+            return l_o_i[ite]
