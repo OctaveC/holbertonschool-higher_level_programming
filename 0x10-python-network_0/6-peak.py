@@ -3,6 +3,7 @@
 Finds a peak in a list of unsorted integers.
 """
 
+
 def find_peak(l_o_i):
     """
     Finds a peak in a list of unsorted integers.
@@ -18,5 +19,5 @@ def find_peak(l_o_i):
         return l_o_i[len(l_o_i) - 1]
 
     for ite in range(1, len(l_o_i) - 1):
-        if l_o_i[ite] >= l_o_i[i + 1] and l_o_i[ite] >= l_o_i[i -1]:
+        if l_o_i[ite] >= l_o_i[i + 1] and l_o_i[ite] >= l_o_i[i - 1]:
             return l_o_i[i]
