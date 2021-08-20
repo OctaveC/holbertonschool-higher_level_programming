@@ -11,7 +11,7 @@ if __name__ == '__main__':
     adress = sys.argv[1]
     requesto = requests.get(adress)
 
-    if r.status_code > 400:
+    if requesto.status_code > 400:
         print("Error code: {}".format(requesto.status_code))
     else:
         print("{}".format(requesto.text))
