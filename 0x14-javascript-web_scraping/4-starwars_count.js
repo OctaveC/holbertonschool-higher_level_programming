@@ -1,14 +1,15 @@
 #!/usr/bin/node
 
 const request = require('request');
+let count = 0;
 
-request.get(process.argv[2], function (err, answer, body) {
-  let count = 0;
-  if (err) console.log(err);
-  const data = JSON.parse(body);
-  for (let ite = 0; data.results[ite] !== undefined; ite++) {
-    if (data.results[ite].characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
-      count++;
+request.get(process.argv[2], { json: true }, function (err, answer, body) {
+  if (err) console.error(err);
+  for (const film of body.results) {
+    for (const people of film.characters) {
+      if (people.indexOf('people/18') >= 0) {
+        count++;
+      }
     }
   }
   console.log(count);
