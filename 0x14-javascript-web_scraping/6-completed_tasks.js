@@ -1,9 +1,18 @@
 #!/usr/bin/node
 
-const fs = require('fs');
+const request = require('request');
 
-fs.writeFile(process.argv[2], process.argv[3], 'utf8', (err, data) => {
-  if (err) {
-    console.log(err);
+request(process.argv[2], function (err, response, body) {
+  if (err) console.log(err);
+  const users = {};
+  for (const task of JSON.parse(body)) {
+    if (task.completed) {
+      if (users[task.userId]) {
+        users[task.userId]++;
+      } else {
+        users[task.userId] = 1;
+      }
+    }
   }
+  console.log(users);
 });
