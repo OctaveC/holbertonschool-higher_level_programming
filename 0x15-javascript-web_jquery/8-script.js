@@ -1,5 +1,5 @@
-$.get('https://swapi-api.hbtn.io/api/films/?format=json', function (thing) {
-  for (let ite = 0; ite <= thing.results.length; i++) {
-    $('UL#list_movies').append('<li>' + thing.results[ite].title + '</li>');
+$.get('https://swapi-api.hbtn.io/api/films/?format=json', function (data) {
+  for (let i = 0; i <= data.results.length; i++) {
+    $('UL#list_movies').append('<li>' + data.results[i].title + '</li>');
   }
 });
